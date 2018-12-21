@@ -174,9 +174,21 @@
 <!--3.对添加，保存，编辑，取消编辑，删除，全部删除进行对应的操作-->
 <script>
    $(function(){
-       //1.删
+       //1.删除
        $("#del").on("click",function(){
-           
+           var trFather =$(".tr_new");
+           if(trFather.length!=1){
+               alert("请选择一行要删除的数据！")
+           }else{
+               var isOK=confirm("您确定要删除吗？")
+               if(isOK){
+                   var resultNo=trFather.children()[0].innerText;
+                   $.ajax({
+                       url:"/res/deleteResult/"+resultNo,
+                       type:"DELETE",
+                   })
+               }
+           }
        })
    })
 </script>

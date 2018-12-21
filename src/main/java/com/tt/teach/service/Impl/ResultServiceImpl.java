@@ -4,6 +4,7 @@ import com.tt.teach.dao.ResultDao;
 import com.tt.teach.pojo.Result;
 import com.tt.teach.service.ResultService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,5 +17,10 @@ public class ResultServiceImpl implements ResultService{
     @Override
     public List<Result> getResultList() {
         return resultDao.getResultList();
+    }
+
+    @Transactional
+    public int deleteResult(Integer resultNo) {
+        return resultDao.deleteResult(resultNo);
     }
 }
