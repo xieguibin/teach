@@ -60,9 +60,9 @@ public class ResultController {
         result.setStudentResult(studentResult);
         int result1 = resultService.updateResult(result);
         if(result1>0){
-            return JsonResult.ok("修改成功",result);
+            return JsonResult.ok("修改成功",result1);
         }
-        return JsonResult.no("修改失败",result);
+        return JsonResult.no("修改失败",result1);
     }
 
     @PutMapping("/addResult")
@@ -77,9 +77,9 @@ public class ResultController {
 
         int result2 = resultService.addResult(result);
         if(result2>0){
-            return JsonResult.ok("添加成功",result);
+            return JsonResult.ok("添加成功",result2);
         }
-        return JsonResult.no("添加失败",result);
+        return JsonResult.no("添加失败",result2);
     }
 
 
