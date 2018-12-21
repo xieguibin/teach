@@ -28,11 +28,23 @@ public class ResultController {
     @DeleteMapping("/deleteResult/{resultNo}")
     @ResponseBody
     public Object deleteResult(@PathVariable Integer resultNo) {
-            int result = resultService.deleteResult(resultNo);
-            if(result>0){
-                return JsonResult.ok("删除成功",result);
-            }
-                return JsonResult.no("删除失败",result);
+        int result = resultService.deleteResult(resultNo);
+        if(result>0){
+            return JsonResult.ok("删除成功",result);
+        }
+        return JsonResult.no("删除失败",result);
+    }
+    @PutMapping("/updateResult")
+    @ResponseBody
+    public Object updateResult(@RequestParam Integer resultNo,@RequestParam Integer studentResult) {
+        Result result = new Result();
+        result.setResultNo(resultNo);
+        result.setStudentResult(studentResult);
+        int result1 = resultService.updateResult(result);
+        if(result1>0){
+            return JsonResult.ok("修改成功",result);
+        }
+        return JsonResult.no("修改失败",result);
     }
 
 
