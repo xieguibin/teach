@@ -34,4 +34,9 @@ public class StudentServiceImpl implements StudentService {
     public int deleteStudent(Integer stuNo) {
         return studentDao.deleteStudent(stuNo);
     }
+
+    @Override
+    public Student getStuByNo(Integer studentNo) {
+        return  studentDao.getStuByNo(studentNo);
+    }
 }

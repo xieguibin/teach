@@ -66,15 +66,17 @@
                         </div>
                         <div class="form-group">
                             <label for="subjectNo">课程编号</label>
-                            <input type="text" class="form-control" id="subjectNo" placeholder="课程编号" required >
+                            <select id="subjectNo" name="subjectNo"   class="form-control">
+                                <option th:each="subject : ${subjectList}" th:text="${subject.subjectName}" th:value="${subject.subjectNo}"></option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="examDate">考试时间</label>
-                           <input type="text" class="form-control" id="examDate" placeholder="考试时间" required >
+                            <input type="text" id="examDate" name="endTime" placeholder="考试时间" class="form-control form-datetime"  onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true})" required="required" readonly="">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group                                                                                                                                                                                                                                         ">
                             <label for="studentResult">学生成绩</label>
-                            <input type="text" class="form-control" id="studentResult" placeholder="学生成绩" required>
+                            <input type="text" maxlength="3" class="form-control" id="studentResult" placeholder="学生成绩" required>
                         </div>
                         <button type="button" class="btn btn-primary" id="addResult">录入</button>
                     </form>
@@ -233,12 +235,66 @@
                })
            }
        })
+
+       //5.添加
+       $("#addResult").on("click",function () {
+           var studentNo = $("#studentNo").val();
+           var subjectNo = $("#subjectNo").val();
+           var examDate = $("#examDate").val();
+           var studentResult = $("#studentResult").val();
+           $.ajax({
+               url:"/res/addResult",
+               type:"PUT",
+               data:{
+                   studentNo:studentNo,
+                   subjectNo:subjectNo,
+                   examDate:examDate,
+                   studentResult:studentResult
+               },
+               success:function (data) {
+                   alert(data.msg);
+                   window.location.reload();
+               }
+           })
+       })
+
+       //6.对学号进行一步查询
+       $("#studentNo").on("blur",function () {
+           var studentNo=$("#studentNo").val();
+           $("#stuNo").removeClass();
+           if(studentNo!=0){
+               $.ajax({
+                   url:"/stu/getStuByNo/"+studentNo,
+                   type:"GET",
+                   success:function (data) {
+                       $("#stuNo").html("温馨提示："+data.msg);
+                       $("#stuNo").addClass("blue");
+                   }
+               })
+           }else{
+               $("#stuNo").html("温馨提示：学号不能为空！");
+               $("#stuNo").addClass("red");
+           }
+       })
+
+
    })
 </script>
 <script>
 
 </script>
 <style type="text/css">
-   
+    .red {
+        color: #ff4c33;
+        font-size: 12px;
+        font-weight: bolder;
+        margin-left: 380px;
+    }
+    .blue {
+        color:blue;
+        font-size: 12px;
+        font-weight: bolder;
+        margin-left: 390px;
+    }
 </style>
 </html>

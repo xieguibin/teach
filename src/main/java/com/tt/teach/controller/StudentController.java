@@ -82,25 +82,6 @@ public class StudentController extends BaseController{
         getSession().removeAttribute(SESSION_KEY);
         return REDIRECT+":/stu/login";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //请求的url：http://localhost:8080/stu/login
     @PostMapping("doLogin")
     public String doLogin() {
@@ -117,21 +98,26 @@ public class StudentController extends BaseController{
         }else {
             return REDIRECT+":/stu/login ";
         }
+
+
+
+
+
+
+
     }
 
 
+     //getStuByNo
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-}
+     @GetMapping("/getStuByNo/{studentNo}")
+     @ResponseBody
+     public Object getStuByNo(@PathVariable Integer studentNo) {
+        Student student = studentService.getStuByNo(studentNo);
+        if (student!=null){
+            return JsonResult.ok("有该学生",student);
+        }
+         return JsonResult.ok("没有该学生",student);
+     }
+ }
