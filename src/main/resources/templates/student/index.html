@@ -72,7 +72,7 @@
 
                 <a href="javascript: window.location.reload();"><span class="glyphicon glyphicon-refresh"></span></a>
                 <a href="javascript:;"><span class="glyphicon glyphicon-cog"></span></a>
-                <a href="javascript:;"><span class="glyphicon glyphicon-envelope"></span></a>
+                <a data-toggle='modal' data-target='#myModal' ><span class="glyphicon glyphicon-envelope"></span></a>
                 </span>
             </div>
 
@@ -84,6 +84,48 @@
     </div>
 </div>
 
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                   飞鸽传书
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form name="placeEmail" enctype="multipart/form-data" method="post" th:action="@{/email/sendEmail}">
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="邮箱" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="titile">主题</label>
+                        <input type="text" class="form-control" id="titile" name="title" placeholder="主题" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="file">附件</label>
+                        <input type="file" class="form-control" id="file" name="file" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="context">内容</label>
+                        <textarea id="context" name="context" cols="35" rows="10" class="form-control" placeholder="请输入内容"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="send">发送</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
