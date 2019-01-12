@@ -24,6 +24,7 @@ public class StudentController extends BaseController{
         return "/student/login";
     }
     @RequestMapping("/index")
+    @ResponseBody
     public String index() {
         String studentName= (String) getSession().getAttribute(SESSION_KEY);
         if (studentName!=null){
